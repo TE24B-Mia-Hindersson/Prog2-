@@ -49,7 +49,7 @@ if (pathtwo.ToLower() == "house")
 {
     Console.WriteLine("You continue to your home, the wind almost blowing you off your feet.");
     Console.WriteLine("Suddenly a large burst of wind knocks you off your feet and you die from the impact");
-Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.ForegroundColor = ConsoleColor.DarkRed;
     Console.WriteLine("Game over");
 }
 else if (pathtwo.ToLower() == "shelter")
@@ -59,19 +59,14 @@ else if (pathtwo.ToLower() == "shelter")
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("Game over");
 }
-else
-{
-    Console.WriteLine("Follow instructions...");
-}
-string paththree = Console.ReadLine();
-if (paththree.ToLower() == "home")
+else if (pathtwo.ToLower() == "home")
 {
     Console.WriteLine("You run home having to dodge debris left and right.");
     Console.WriteLine("You get to your door step and take a big deep breath in.");
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("You survived! Game over");
 }
-else if (paththree.ToLower() == "continue")
+else if (pathtwo.ToLower() == "continue")
 {
     Console.WriteLine("You continue walking. The wind is almost unbearable and you are dodging dust and debris.");
     Console.WriteLine("You find it hard to keep balance as the wind is trying its hardest to push you over");
@@ -91,7 +86,7 @@ if (pathfour.ToLower() == "yes")
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("You survived! Game over");
 }
-else if (paththree.ToLower() == "no")
+else if (pathfour.ToLower() == "no")
 {
     Console.WriteLine("You stay still. The wind finally gets to you and knocks you down");
     Console.ForegroundColor = ConsoleColor.DarkRed;
