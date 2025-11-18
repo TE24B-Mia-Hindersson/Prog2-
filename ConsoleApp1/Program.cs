@@ -90,7 +90,7 @@ else if (pathfour.ToLower() == "no")
 {
     Console.WriteLine("You stay still. The wind finally gets to you and knocks you down");
     Console.ForegroundColor = ConsoleColor.DarkRed;
-    Console.WriteLine("You die! Game over");    
+    Console.WriteLine("You die! Game over"); 
 }
 else
 {
