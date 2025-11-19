@@ -1,26 +1,40 @@
-﻿Console.WriteLine("Welcome to Stardust pet adoption!");
-Console.WriteLine("Please tell me which, between these lovely three pets you would like?");
-Console.WriteLine("1. Duck (difficulty easy)");
-Console.WriteLine("2. Frog (difficulty medium)");
-Console.WriteLine("3. Cat (difficulty hard)");
-Console.WriteLine("Enter the number of your choice:");
-string pet = Console.ReadLine();
+﻿Console.WriteLine("==Welcome to Stardust pet adoption!==");
+Console.ReadLine();
+Console.Clear();
+Console.WriteLine("   Please tell me which, between these lovely three pets you would like?");
+Console.WriteLine("---------------------------------------------------------------------------");
+Console.WriteLine("                      1. Duck (difficulty easy)");
+Console.WriteLine("---------------------------------------------------------------------------");
+Console.WriteLine("                     2. Frog (difficulty medium)");
+Console.WriteLine("---------------------------------------------------------------------------");
+Console.WriteLine("                      3. Cat (difficulty hard)");
+Console.WriteLine("---------------------------------------------------------------------------");
+Console.WriteLine("                   Enter the number of your choice:");
 int choicep;
-bool isvalidchoice = int.TryParse(pet, out choicep);
+string input;
+// bool isvalidchoice = int.TryParse(pet, out choicep);
+Console.ReadLine();
+Console.Clear();
+while (true)
+{
+    input = Console.ReadLine();
+    if (int.TryParse(input, out choicep) && choicep <= 1 && choicep >= 3)
+        break;
+
+    Console.WriteLine("-----------------------------------------------");
+    Console.WriteLine("         Please choose a valid pet!!");
+    Console.WriteLine("------------------------------------------------");
+    Console.ReadLine();
+}
+string pet = Console.ReadLine();
 int difficulty = 10;
 string diff;
-Console.Clear();
-Console.ReadLine();
-if (!isvalidchoice || choicep < 1 || choicep > 3 )
-{
-   Console.WriteLine("Please choose a valid pet!!"); 
-}
- else if ( choicep == 1)
+if (choicep == 1)
 {
     pet = "Duck";
     difficulty = 10;
 }
-else if ( choicep == 2)
+else if (choicep == 2)
 {
     pet = "Frog";
     difficulty = 20;
@@ -28,17 +42,17 @@ else if ( choicep == 2)
 else if (choicep == 3)
 {
     pet = "Cat";
-     difficulty = 30;
+    difficulty = 30;
 }
 if (difficulty == 10)
 {
     diff = "easy";
 }
-if (difficulty == 20)
+else if (difficulty == 20)
 {
     diff = "medium";
 }
-if (difficulty == 30)
+else if (difficulty == 30)
 {
     diff = "hard";
 }
@@ -46,11 +60,18 @@ else
 {
     diff = "unknown";
 }
-Console.WriteLine("Excellent choice!");
-Console.WriteLine($"-you now own a {pet}-");
-Console.WriteLine($"- difficulty level:{diff}-");
+Console.WriteLine("------------------------------------------");
+Console.WriteLine("           Excellent choice!");
+Console.WriteLine($"        --you now own a {pet}--");
+Console.WriteLine($"         --difficulty level:{diff}--");
+Console.WriteLine("-------------------------------------------");
+Console.ReadLine();
+Console.Clear();
 
-
+Console.WriteLine("---------------------------------------------------------------");
+Console.WriteLine("Would you like to choose a name, or be given a prechosen name?");
+Console.WriteLine("----------------------------------------------------------------");
+string name = Console.ReadLine();
 
 
 Console.ReadLine();
