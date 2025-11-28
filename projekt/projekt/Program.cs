@@ -276,9 +276,9 @@ while (currentstage == egg)
     }
 }
 string input3 = "";
-static void option(int play, int feed, int sleep, int medicine, int bathe)
+static void option(int play, int feed, int sleep, int medicine, int bathe, int shop)
 {
-    Console.WriteLine("Options: Play     Feed      Sleep     Give medicine      Bathe");
+    Console.WriteLine("Options: Play     Feed      Sleep     Give medicine      Bathe    Shop");
 }
 if (pet == "Frog" || pet == "Duck" && currentstage == baby)
 {
@@ -303,7 +303,8 @@ while (currentstage == baby)
     int sleep = 0;
     int medicine = 0;
     int bathe = 0;
-    option(play, feed, sleep, medicine, bathe);
+    int shop = 0;
+    option(play, feed, sleep, medicine, bathe, shop);
     input3 = Console.ReadLine().ToLower();
     if (input3 == "play")
     {
@@ -489,21 +490,70 @@ while (currentstage == baby)
             meds--;
         }
     }
-int bath = 1;
+    int bath = 1;
     {
-      if (input3 == "bathe")
-    {
-        Console.WriteLine($"--- You give {name} a bath, this cleans them and makes them happier---");
-        Console.ReadLine();
-        cleanness += 30;
-        happiness += 5;
+        if (input3 == "bathe")
+        {
+            Console.WriteLine($"--- You give {name} a bath, this cleans them and makes them happier---");
+            Console.ReadLine();
+            cleanness += 30;
+            happiness += 5;
+        }
+        else
+        {
+            bath--;
+        }
+        int shops = 1;
+        while (shops == 1)
+            if (input3 == "shop")
+            {
+                Console.WriteLine("---You walk to the store---");
+                Console.WriteLine("--Hello! Welcome to berts store!--");
+                Console.WriteLine($"---Current amount: {money}---");
+                Console.WriteLine("--What would you like today?--");
+                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine($"---Here are your choices!---");
+                Console.WriteLine("---1. Hunger fufiller---");
+                Console.WriteLine("--- Cost: 20 coins---");
+                Console.WriteLine("--- Gives your pet full hunger immediatley---");
+                Console.WriteLine("---2. Medicine boost---");
+                Console.WriteLine("--- Cost: 20 coins---");
+                Console.WriteLine("--- Great if your pet is very low on health, boost pet upp to 100 health immediatley---");
+                Console.WriteLine("---3. Super meal---");
+                Console.WriteLine("--- Cost: 50 coins---");
+                Console.WriteLine("---Fufills all pets needs---");
+                Console.WriteLine("---Type EXIT to leave---");
+                string choicesh = Console.ReadLine();
+                if (choicesh == "1")
+                {
+                    Console.WriteLine("-- Perfekt!--");
+                    Console.WriteLine("---Hunger fufiller has been added to the food menu..---");
+                    Console.ReadLine();
+
+                }
+                if (choicesh == "2")
+                {
+                    Console.WriteLine("--Excellent!--");
+                    Console.WriteLine("---Medicine boost has been added to the food menu..---");
+                    Console.ReadLine();
+
+                }
+                if (choicesh == "3")
+                {
+                    Console.WriteLine("-- Good choice!--");
+                    Console.WriteLine("---Super meal has been added to the food menu..---");
+                    Console.ReadLine();
+
+                }
+                else
+                {
+                    shops--;
+                }
+            }
     }
-    else
-    {
-        bath--;
-    }  
-    }
-    
+
+
 }
 
 Console.ReadLine();
