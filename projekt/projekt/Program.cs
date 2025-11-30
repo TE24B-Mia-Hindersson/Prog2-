@@ -1,4 +1,6 @@
-﻿Console.WriteLine("==Welcome to Bosse pet adoption!==");
+﻿using System.Formats.Asn1;
+
+Console.WriteLine("==Welcome to Bosse pet adoption!==");
 Console.ReadLine();
 Console.Clear();
 Console.WriteLine("   Please tell me which, between these lovely three pets you would like?");
@@ -15,6 +17,7 @@ string input;
 string pet = "";
 int difficulty = 10;
 string diff;
+
 while (choicep <= 0)
 {
     input = Console.ReadLine();
@@ -291,9 +294,9 @@ while (currentstage == baby)
 {
     Console.Clear();
     info(happiness, hunger, energy, health, cleanness);
-    happiness -= 20;
-    hunger -= 30;
-    energy -= 30;
+    happiness -= 10;
+    hunger -= 10;
+    energy -= 15;
     if (happiness < 0) happiness = 0;
     if (hunger < 0) hunger = 0;
     if (energy < 0) energy = 0;
@@ -304,6 +307,7 @@ while (currentstage == baby)
     int medicine = 0;
     int bathe = 0;
     int shop = 0;
+    List<string> foodinv = new List<string>();
     option(play, feed, sleep, medicine, bathe, shop);
     input3 = Console.ReadLine().ToLower();
     if (input3 == "play")
@@ -312,15 +316,11 @@ while (currentstage == baby)
         Console.WriteLine("---There are 3 different games you can choose to play with your pet---");
         Console.WriteLine("---1. Guess the number ---");
         Console.WriteLine("---Your pet will hide a number between 1-5 (dont ask how), guess right and get happiness points, guess wrong and lose happiness!---");
-        Console.WriteLine("---2. Tap ---");
-        Console.WriteLine("---Type the word given within 4 seconds, fail and your pet loses happiness! ---");
-        Console.WriteLine("---3. Feed and catch ---");
+        Console.WriteLine("---2. Word ---");
+        Console.WriteLine("---Type the word given within 2 seconds, fail and your pet loses happiness! ---");
+        Console.WriteLine("---3. Feed and guess---");
         Console.WriteLine("---You are given two foods, choose wrong and your pet falls sick, succeed and you fufill both hunger and happiness points---");
         Console.WriteLine("---Please choose a game or type EXIT to exit---");
-    }
-    int games = 1;
-    while (games == 1)
-    {
         string choice = Console.ReadLine();
         if (choice == "1")
         {
@@ -338,12 +338,14 @@ while (currentstage == baby)
                 Console.ReadLine();
                 happiness += 20;
                 money += 10;
+
             }
             else
             {
                 Console.WriteLine($"---Oh no! {name} was actually thinking of {secret} ---");
                 Console.ReadLine();
                 happiness -= 5;
+
             }
 
         }
@@ -351,24 +353,26 @@ while (currentstage == baby)
         {
             Console.Clear();
             info(happiness, hunger, energy, health, cleanness);
-            Console.WriteLine("Type the word 'yay' within 4 seconds!");
+            Console.WriteLine("Type the word 'yay' within 2 seconds!");
 
             string word = "yay";
             var start = DateTime.Now;
             string resp = Console.ReadLine();
             var end = DateTime.Now;
 
-            if (resp == word && (end - start).TotalSeconds <= 4)
+            if (resp == word && (end - start).TotalSeconds <= 2)
             {
                 Console.WriteLine("---Good job!---");
                 Console.WriteLine("---Your pet was so happy, they give you 20 coins---");
                 happiness += 20;
                 money += 20;
+
             }
             else
             {
                 Console.WriteLine("Too slow!");
                 happiness -= 10;
+
             }
             Console.ReadLine();
         }
@@ -390,6 +394,7 @@ while (currentstage == baby)
                 happiness += 20;
                 hunger += 10;
                 money += 10;
+
             }
             else
             {
@@ -397,163 +402,227 @@ while (currentstage == baby)
                 Console.ReadLine();
                 happiness -= 40;
                 health -= 20;
-            }
 
-        }
-        else
-        {
-            games--;
+            }
         }
     }
-    int foods = 1;
-    while (foods == 1)
+
+    else if (input3 == "feed")
     {
-        if (input3 == "feed")
+        Console.WriteLine("---There are 3 different foods to feed your pet---");
+        Console.WriteLine("---You can even buy food in the store for coins, these foods have special affects---");
+        Console.WriteLine($"---Current amount: {money}---");
+        Console.WriteLine($"---Money is only displayed within the store and when choosing food..---");
+        Console.ReadLine();
+        Console.Clear();
+        Console.WriteLine($"---Here are your choices!---");
+        Console.WriteLine("---(store items only displayed after purchase)---");
+        Console.WriteLine("---1. Simple snack---");
+        Console.WriteLine("--- Doesnt fufill a lot of hunger, good for baby stage. Leads to pet getting dirty faster!---");
+        Console.WriteLine("---2. Hearty meal---");
+        Console.WriteLine("--- Great if your pet is very low on hunger, fufills a small bit of happiness---");
+        Console.WriteLine("---3. Sweet treat---");
+        Console.WriteLine("---Bad for you and doesnt fufill a lot of hunger, in substitute it gives you a lot of happiness---");
+        Console.WriteLine("---Type EXIT to leave---");
+        int shopnmr = 4;
+        foreach (string thing in foodinv)
         {
-            Console.WriteLine("---There are 3 different foods to feed your pet---");
-            Console.WriteLine("---You can even buy food in the store for coins, these foods have special affects---");
-            Console.WriteLine($"---Current amount: {money}---");
-            Console.WriteLine($"---Money is only displayed within the store and when choosing food..---");
+            Console.WriteLine($"---{shopnmr}. {thing}---");
+            shopnmr++;
+        }
+        string choicef = Console.ReadLine();
+        if (choicef == "1")
+        {
+            Console.WriteLine("--- Great choice!---");
+            Console.WriteLine($"---{name} gobbles it up fast!---");
             Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine($"---Here are your choices!---");
-            Console.WriteLine("---(store items only displayed after purchase)---");
-            Console.WriteLine("---1. Simple snack---");
-            Console.WriteLine("--- Doesnt fufill a lot of hunger, good for baby stage. Leads to pet getting dirty faster!---");
-            Console.WriteLine("---2. Hearty meal---");
-            Console.WriteLine("--- Great if your pet is very low on hunger, fufills a small bit of happiness---");
-            Console.WriteLine("---3. Sweet treat---");
-            Console.WriteLine("---Bad for you and doesnt fufill a lot of hunger, in substitute it gives you a lot of happiness---");
-            Console.WriteLine("---Type EXIT to leave---");
-            string choicef = Console.ReadLine();
-            if (choicef == "1")
+            hunger += 10;
+            cleanness -= 20;
+        }
+        if (choicef == "2")
+        {
+            Console.WriteLine("---Excellent!---");
+            Console.WriteLine($"---{name} eats it happily---");
+            Console.ReadLine();
+            hunger += 30;
+            happiness += 5;
+
+        }
+        if (choicef == "3")
+        {
+            Console.WriteLine("--- Good decision!---");
+            Console.WriteLine($"---{name} enjoys their sweet treat!---");
+            Console.ReadLine();
+            hunger += 10;
+            happiness += 30;
+            health -= 10;
+
+        }
+        int num;
+        if (int.TryParse(choicef, out num))
+        {
+            int index = num - 4;
+
+            if (index >= 0 && index < foodinv.Count)
             {
-                Console.WriteLine("--- Great choice!---");
-                Console.WriteLine($"---{name} gobbles it up fast!---");
-                Console.ReadLine();
-                hunger += 10;
-                cleanness -= 20;
+                string thing = foodinv[index];
+
+                if (thing == "Hunger Fufiller")
+                {
+                    Console.WriteLine("--- Great choice!---");
+                    Console.WriteLine($"---{name} eats the hunger fufiller!---");
+                    Console.ReadLine();
+                    hunger = 100;
+                }
+                else if (thing == "Medicine boost")
+                {
+                    Console.WriteLine("--- Good!---");
+                    Console.WriteLine($"---{name} drinks the med boost!---");
+                    Console.ReadLine();
+                    health = 100;
+                }
+                if (thing == "Super meal")
+                {
+                    Console.WriteLine("--- Great choice!---");
+                    Console.WriteLine($"---{name} really enjoys the super meal!---");
+                    Console.ReadLine();
+                    hunger = 100;
+                    health = 100;
+                    energy = 100;
+                    happiness = 100;
+                    cleanness = 100;
+                }
 
             }
-            if (choicef == "2")
-            {
-                Console.WriteLine("---Excellent!---");
-                Console.WriteLine($"---{name} eats it happily---");
-                Console.ReadLine();
-                hunger += 30;
-                happiness += 5;
+        }
 
-            }
-            if (choicef == "3")
-            {
-                Console.WriteLine("--- Good decision!---");
-                Console.WriteLine($"---{name} enjoys their sweet treat!---");
-                Console.ReadLine();
-                hunger += 10;
-                happiness += 30;
-                health -= 10;
 
+    }
+
+    else if (input3 == "sleep")
+    {
+        Console.WriteLine($"--- You put {name} to bed---");
+        Console.ReadLine();
+        energy += 20;
+        happiness += 5;
+
+    }
+
+
+
+
+    else if (input3 == "give medcicine")
+    {
+        Console.WriteLine($"--- You give {name} some medicine, they feel immediatley better---");
+        Console.ReadLine();
+        health += 20;
+        happiness += 5;
+    }
+    if (input3 == "bathe")
+    {
+        Console.WriteLine($"--- You give {name} a bath, this cleans them and makes them happier---");
+        Console.ReadLine();
+        cleanness += 30;
+        happiness += 5;
+
+    }
+
+    else if (input3 == "shop")
+    {
+        Console.WriteLine("---You walk to the store---");
+        Console.WriteLine("--Hello! Welcome to berts store!--");
+        Console.WriteLine($"---Current amount: {money}---");
+        Console.WriteLine("--What would you like today?--");
+        Console.ReadLine();
+        Console.Clear();
+        Console.WriteLine($"---Here are your choices!---");
+        Console.WriteLine("---1. Hunger fufiller---");
+        Console.WriteLine("--- Cost: 20 coins---");
+        Console.WriteLine("--- Gives your pet full hunger immediatley---");
+        Console.WriteLine("---2. Medicine boost---");
+        Console.WriteLine("--- Cost: 20 coins---");
+        Console.WriteLine("--- Great if your pet is very low on health, boost pet upp to 100 health immediatley---");
+        Console.WriteLine("---3. Super meal---");
+        Console.WriteLine("--- Cost: 50 coins---");
+        Console.WriteLine("---Fufills all pets needs---");
+        Console.WriteLine("---Type EXIT to leave---");
+
+        string choicesh = Console.ReadLine();
+        if (choicesh == "1")
+        {
+            if (money >= 20)
+            {
+                foodinv.Add("Hunger fufiller");
+                Console.WriteLine("-- Perfekt!--");
+                Console.WriteLine("---Hunger fufiller has been added to the food menu..---");
+                Console.ReadLine();
+                money -= 20;
             }
             else
             {
-                foods--;
-            }
-        }
-    }
-    int sleeps = 1;
-    while (sleeps == 1)
-    {
-        if (input3 == "sleep")
-        {
-            Console.WriteLine($"--- You put {name} to bed---");
-            Console.ReadLine();
-            energy += 20;
-            happiness += 5;
-        }
-        else
-        {
-            sleeps--;
-        }
-    }
-    int meds = 1;
-    while (meds == 1)
-    {
-        if (input3 == "give medcicine")
-        {
-            Console.WriteLine($"--- You give {name} some medicine, they feel immediatley better---");
-            Console.ReadLine();
-            health += 20;
-            happiness += 5;
-        }
-        else
-        {
-            meds--;
-        }
-    }
-    int bath = 1;
-    {
-        if (input3 == "bathe")
-        {
-            Console.WriteLine($"--- You give {name} a bath, this cleans them and makes them happier---");
-            Console.ReadLine();
-            cleanness += 30;
-            happiness += 5;
-        }
-        else
-        {
-            bath--;
-        }
-        int shops = 1;
-        while (shops == 1)
-            if (input3 == "shop")
-            {
-                Console.WriteLine("---You walk to the store---");
-                Console.WriteLine("--Hello! Welcome to berts store!--");
-                Console.WriteLine($"---Current amount: {money}---");
-                Console.WriteLine("--What would you like today?--");
+                Console.WriteLine("Not enough money!");
                 Console.ReadLine();
-                Console.Clear();
-                Console.WriteLine($"---Here are your choices!---");
-                Console.WriteLine("---1. Hunger fufiller---");
-                Console.WriteLine("--- Cost: 20 coins---");
-                Console.WriteLine("--- Gives your pet full hunger immediatley---");
-                Console.WriteLine("---2. Medicine boost---");
-                Console.WriteLine("--- Cost: 20 coins---");
-                Console.WriteLine("--- Great if your pet is very low on health, boost pet upp to 100 health immediatley---");
-                Console.WriteLine("---3. Super meal---");
-                Console.WriteLine("--- Cost: 50 coins---");
-                Console.WriteLine("---Fufills all pets needs---");
-                Console.WriteLine("---Type EXIT to leave---");
-                string choicesh = Console.ReadLine();
-                if (choicesh == "1")
-                {
-                    Console.WriteLine("-- Perfekt!--");
-                    Console.WriteLine("---Hunger fufiller has been added to the food menu..---");
-                    Console.ReadLine();
-
-                }
-                if (choicesh == "2")
-                {
-                    Console.WriteLine("--Excellent!--");
-                    Console.WriteLine("---Medicine boost has been added to the food menu..---");
-                    Console.ReadLine();
-
-                }
-                if (choicesh == "3")
-                {
-                    Console.WriteLine("-- Good choice!--");
-                    Console.WriteLine("---Super meal has been added to the food menu..---");
-                    Console.ReadLine();
-
-                }
-                else
-                {
-                    shops--;
-                }
             }
-    }
 
+        }
+        if (choicesh == "2")
+        {
+            if (money >= 20)
+            {
+                foodinv.Add("Medicine boost");
+                Console.WriteLine("--Excellent!--");
+                Console.WriteLine("---Medicine boost has been added to the food menu..---");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Not enough money!");
+                Console.ReadLine();
+            }
+
+        }
+        if (choicesh == "3")
+        {
+            if (money >= 50)
+            {
+                foodinv.Add("Super meal");
+                Console.WriteLine("-- Good choice!--");
+                Console.WriteLine("---Super meal has been added to the food menu..---");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Not enough money!");
+                Console.ReadLine();
+            }
+
+        }
+        else
+        {
+            Console.WriteLine("---Not enough money or exit choosen!---");
+            Console.ReadLine();
+        }
+
+    }
 
 }
+if (hunger <= 0 || happiness <= 0 || energy <= 0 || cleanness <= 0)
+{
+    health -= 20;
+    Console.WriteLine("---WARNING!!!---");
+    Console.WriteLine("--- Your pet is dying due to neglect!!---");
+    Console.ReadLine();
+}
+if (health > 100) health = 100;
+if (health < 0) health = 0;
+
+if (health <= 0)
+{
+    Console.WriteLine("---Oh no!---");
+    Console.WriteLine($"---{name} has passed away..---");
+    Console.ReadLine();
+    Environment.Exit(0);
+}
+
 
 Console.ReadLine();
