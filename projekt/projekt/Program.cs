@@ -1,5 +1,7 @@
 ﻿using System.Formats.Asn1;
-
+// Add the difficulty things as mentioned
+// Add the death stage!
+// Maybe make differences for different stages?
 Console.WriteLine("==Welcome to Bosse pet adoption!==");
 Console.ReadLine();
 Console.Clear();
@@ -238,6 +240,16 @@ static void info(int PetHappiness, int PetHunger, int PetEnergy, int PetHealth, 
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 }
 int TapAmount = 0;
+if (PetHappiness > 100) PetHappiness = 100;
+if (PetHappiness < 0) PetHappiness = 0;
+if (PetEnergy > 100) PetEnergy = 100;
+if (PetEnergy < 0) PetEnergy = 0;
+if (PetHealth > 100) PetHealth = 100;
+if (PetHealth < 0) PetHealth = 0;
+if (PetCleanliness > 100) PetCleanliness = 100;
+if (PetCleanliness < 0) PetCleanliness = 0;
+if (PetHunger > 100) PetHunger = 100;
+if (PetHunger < 0) PetHunger = 0;
 while (PetCurrentStage == Egg)
 {
     Console.Clear();
@@ -275,8 +287,6 @@ while (PetCurrentStage == Egg)
         Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
     }
-    if (PetHappiness > 100) PetHappiness = 100;
-    if (PetHappiness < 0) PetHappiness = 0;
 
     if (TapAmount >= 5)
     {
@@ -302,6 +312,8 @@ if (Pet == "Frog" || Pet == "Duck" && PetCurrentStage == Baby)
     Console.ReadLine();
     Console.Clear();
 }
+int Play, Feed, Sleep, Medicine, Bathe, Shop, PetAging;
+PetInfo(ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, out Play, out Feed, out Sleep, out Medicine, out Bathe, out Shop, out PetAging);
 while (PetCurrentStage == Baby)
 {
     Console.Clear();
@@ -309,6 +321,105 @@ while (PetCurrentStage == Baby)
     PetHappiness -= 10;
     PetHunger -= 10;
     PetEnergy -= 15;
+
+    option(Play, Feed, Sleep, Medicine, Bathe, Shop);
+    PetAction = WholeStageSection(FoodInventory, PetName, ref Money, ref PetCurrentStage, Teen, ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, ref PetCleanliness, ref PetAging);
+    if (PetAging >= 20)
+    {
+        PetCurrentStage = Teen;
+    }
+}
+while (PetCurrentStage == Teen)
+{
+    Console.Clear();
+    PetInfo(ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, out Play, out Feed, out Sleep, out Medicine, out Bathe, out Shop, out PetAging);
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    Console.WriteLine($"---{PetName} has evolved into a Teen!---");
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    Console.ReadLine();
+    Console.Clear();
+    info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+    option(Play, Feed, Sleep, Medicine, Bathe, Shop);
+    PetHappiness -= 15;
+    PetHunger -= 15;
+    PetEnergy -= 20;
+    PetAction = WholeStageSection(FoodInventory, PetName, ref Money, ref PetCurrentStage, Teen, ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, ref PetCleanliness, ref PetAging);
+    if (PetAging >= 40)
+    {
+        PetCurrentStage = Adult;
+    }
+}
+while (PetCurrentStage == Adult)
+{
+    Console.Clear();
+    PetInfo(ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, out Play, out Feed, out Sleep, out Medicine, out Bathe, out Shop, out PetAging);
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    Console.WriteLine($"---{PetName} has evolved into an Adult!---");
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    Console.ReadLine();
+    Console.Clear();
+    info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+    option(Play, Feed, Sleep, Medicine, Bathe, Shop);
+    PetHappiness -= 15;
+    PetHunger -= 20;
+    PetEnergy -= 30;
+    PetAction = WholeStageSection(FoodInventory, PetName, ref Money, ref PetCurrentStage, Teen, ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, ref PetCleanliness, ref PetAging);
+    if (PetAging >= 70)
+    {
+        PetCurrentStage = Elder;
+    }
+}
+while (PetCurrentStage == Elder)
+{
+    Console.Clear();
+    PetInfo(ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, out Play, out Feed, out Sleep, out Medicine, out Bathe, out Shop, out PetAging);
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    Console.WriteLine($"---{PetName} has evolved into a Elder!---");
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    Console.ReadLine();
+    Console.Clear();
+    info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+    option(Play, Feed, Sleep, Medicine, Bathe, Shop);
+    PetHappiness -= 30;
+    PetHunger -= 30;
+    PetEnergy -= 40;
+    PetAction = WholeStageSection(FoodInventory, PetName, ref Money, ref PetCurrentStage, Teen, ref PetHappiness, ref PetHunger, ref PetEnergy, ref PetHealth, ref PetCleanliness, ref PetAging);
+    if (PetAging >= 100)
+    {
+        // death!!
+    }
+}
+
+
+Console.ReadLine();
+
+static void ExplainPetFood(List<string> FoodInventory, int Money)
+{
+    Console.WriteLine("---There are 3 different foods to feed your pet---");
+    Console.WriteLine("---You can even buy food in the store for coins, these foods have special affects---");
+    Console.WriteLine($"---Current amount: {Money}---");
+    Console.WriteLine($"---Money is only displayed within the store and when choosing food..---");
+    Console.ReadLine();
+    Console.Clear();
+    Console.WriteLine($"---Here are your choices!---");
+    Console.WriteLine("---(store items only displayed after purchase)---");
+    Console.WriteLine("---1. Simple snack---");
+    Console.WriteLine("--- Doesnt fufill a lot of hunger, good for baby stage. Leads to pet getting dirty faster!---");
+    Console.WriteLine("---2. Hearty meal---");
+    Console.WriteLine("--- Great if your pet is very low on hunger, fufills a small bit of happiness---");
+    Console.WriteLine("---3. Sweet treat---");
+    Console.WriteLine("---Bad for you and doesnt fufill a lot of hunger, in substitute it gives you a lot of happiness---");
+    int ShopInvNmr = 4;
+    foreach (string Item in FoodInventory)
+    {
+        Console.WriteLine($"---{ShopInvNmr}. {Item}---");
+        ShopInvNmr++;
+    }
+    Console.WriteLine("---Type EXIT to leave---");
+}
+
+static void PetInfo(ref int PetHappiness, ref int PetHunger, ref int PetEnergy, ref int PetHealth, out int Play, out int Feed, out int Sleep, out int Medicine, out int Bathe, out int Shop, out int PetAging)
+{
     if (PetHappiness < 0) PetHappiness = 0;
     if (PetHunger < 0) PetHunger = 0;
     if (PetEnergy < 0) PetEnergy = 0;
@@ -317,19 +428,33 @@ while (PetCurrentStage == Baby)
     if (PetHunger > 100) PetHunger = 100;
     if (PetEnergy > 100) PetEnergy = 100;
     if (PetHealth > 100) PetHealth = 100;
-    int Play = 0;
-    int Feed = 0;
-    int Sleep = 0;
-    int Medicine = 0;
-    int Bathe = 0;
-    int Shop = 0;
-    int PetAging = 0;
-    option(Play, Feed, Sleep, Medicine, Bathe, Shop);
-    PetAction = Console.ReadLine().ToLower();
+    Play = 0;
+    Feed = 0;
+    Sleep = 0;
+    Medicine = 0;
+    Bathe = 0;
+    Shop = 0;
+    PetAging = 0;
+}
+
+static void ExplainPetPlay()
+{
+    Console.Clear();
+    Console.WriteLine("---There are 3 different games you can choose to play with your pet---");
+    Console.WriteLine("---1. Guess the number ---");
+    Console.WriteLine("---Your pet will hide a number between 1-5 (dont ask how), guess right and get happiness points, guess wrong and lose happiness!---");
+    Console.WriteLine("---2. Word ---");
+    Console.WriteLine("---Type the word given within 2 seconds, fail and your pet loses happiness! ---");
+    Console.WriteLine("---3. Feed and guess---");
+    Console.WriteLine("---You are given two foods, choose wrong and your pet falls sick, succeed and you fufill both hunger and happiness points---");
+    Console.WriteLine("---Please choose a game or type EXIT to exit---");
+}
+
+static string WholeStageSection(List<string> FoodInventory, string PetName, ref int Money, ref string PetCurrentStage, string Teen, ref int PetHappiness, ref int PetHunger, ref int PetEnergy, ref int PetHealth, ref int PetCleanliness, ref int PetAging)
+{
+    string PetAction = Console.ReadLine().ToLower();
     if (PetAction == "play")
     {
-        // PlayWith(myPet);
-
         ExplainPetPlay();
         string ChoiceGame = Console.ReadLine();
         if (ChoiceGame == "1")
@@ -440,7 +565,7 @@ while (PetCurrentStage == Baby)
 
             }
         }
-        PetAging ++;
+        PetAging++;
     }
 
     else if (PetAction == "feed")
@@ -678,6 +803,7 @@ while (PetCurrentStage == Baby)
         Console.WriteLine("--- Your pet is dying due to neglect!!---");
         Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
+
     }
     if (PetHealth > 100) PetHealth = 100;
     if (PetHealth < 0) PetHealth = 0;
@@ -692,54 +818,5 @@ while (PetCurrentStage == Baby)
         Console.ReadLine();
         Environment.Exit(0);
     }
-    if (PetAging >= 20)
-    {
-        PetCurrentStage = Teen;
-    }
-}
-while (PetCurrentStage == Teen)
-{
-    
-    
-}
-
-
-Console.ReadLine();
-
-static void ExplainPetPlay()
-{
-    Console.Clear();
-    Console.WriteLine("---There are 3 different games you can choose to play with your pet---");
-    Console.WriteLine("---1. Guess the number ---");
-    Console.WriteLine("---Your pet will hide a number between 1-5 (dont ask how), guess right and get happiness points, guess wrong and lose happiness!---");
-    Console.WriteLine("---2. Word ---");
-    Console.WriteLine("---Type the word given within 2 seconds, fail and your pet loses happiness! ---");
-    Console.WriteLine("---3. Feed and guess---");
-    Console.WriteLine("---You are given two foods, choose wrong and your pet falls sick, succeed and you fufill both hunger and happiness points---");
-    Console.WriteLine("---Please choose a game or type EXIT to exit---");
-}
-
-static void ExplainPetFood(List<string> FoodInventory, int Money)
-{
-    Console.WriteLine("---There are 3 different foods to feed your pet---");
-    Console.WriteLine("---You can even buy food in the store for coins, these foods have special affects---");
-    Console.WriteLine($"---Current amount: {Money}---");
-    Console.WriteLine($"---Money is only displayed within the store and when choosing food..---");
-    Console.ReadLine();
-    Console.Clear();
-    Console.WriteLine($"---Here are your choices!---");
-    Console.WriteLine("---(store items only displayed after purchase)---");
-    Console.WriteLine("---1. Simple snack---");
-    Console.WriteLine("--- Doesnt fufill a lot of hunger, good for baby stage. Leads to pet getting dirty faster!---");
-    Console.WriteLine("---2. Hearty meal---");
-    Console.WriteLine("--- Great if your pet is very low on hunger, fufills a small bit of happiness---");
-    Console.WriteLine("---3. Sweet treat---");
-    Console.WriteLine("---Bad for you and doesnt fufill a lot of hunger, in substitute it gives you a lot of happiness---");
-    int ShopInvNmr = 4;
-    foreach (string Item in FoodInventory)
-    {
-        Console.WriteLine($"---{ShopInvNmr}. {Item}---");
-        ShopInvNmr++;
-    }
-    Console.WriteLine("---Type EXIT to leave---");
+    return PetAction;
 }
