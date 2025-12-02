@@ -18,6 +18,8 @@ string pet = "";
 int difficulty = 10;
 string diff;
 
+Pet myPet = new();
+List<string> foodinv = new List<string>();
 while (choicep <= 0)
 {
     input = Console.ReadLine();
@@ -94,7 +96,7 @@ if (input1 == "yes")
 {
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
     Console.WriteLine($"Great! Now let me know what youd like to name your {pet}:");
-    name = Console.ReadLine();
+    myPet.Name = Console.ReadLine();
     Console.WriteLine($"Aww what a wonderful name!");
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 }
@@ -278,7 +280,7 @@ while (currentstage == egg)
         Console.ReadLine();
     }
 }
-string input3 = "";
+string petAction = "";
 static void option(int play, int feed, int sleep, int medicine, int bathe, int shop)
 {
     Console.WriteLine("Options: Play     Feed      Sleep     Give medicine      Bathe    Shop");
@@ -301,26 +303,23 @@ while (currentstage == baby)
     if (hunger < 0) hunger = 0;
     if (energy < 0) energy = 0;
     if (health < 0) health = 0;
+    if (happiness > 100) happiness = 100;
+    if (hunger > 100) hunger = 100;
+    if (energy > 100) energy = 100;
+    if (health > 100) health = 100;
     int play = 0;
     int feed = 0;
     int sleep = 0;
     int medicine = 0;
     int bathe = 0;
     int shop = 0;
-    List<string> foodinv = new List<string>();
     option(play, feed, sleep, medicine, bathe, shop);
-    input3 = Console.ReadLine().ToLower();
-    if (input3 == "play")
+    petAction = Console.ReadLine().ToLower();
+    if (petAction == "play")
     {
-        Console.Clear();
-        Console.WriteLine("---There are 3 different games you can choose to play with your pet---");
-        Console.WriteLine("---1. Guess the number ---");
-        Console.WriteLine("---Your pet will hide a number between 1-5 (dont ask how), guess right and get happiness points, guess wrong and lose happiness!---");
-        Console.WriteLine("---2. Word ---");
-        Console.WriteLine("---Type the word given within 2 seconds, fail and your pet loses happiness! ---");
-        Console.WriteLine("---3. Feed and guess---");
-        Console.WriteLine("---You are given two foods, choose wrong and your pet falls sick, succeed and you fufill both hunger and happiness points---");
-        Console.WriteLine("---Please choose a game or type EXIT to exit---");
+        // PlayWith(myPet);
+
+        ExplainPetPlay();
         string choice = Console.ReadLine();
         if (choice == "1")
         {
@@ -407,29 +406,16 @@ while (currentstage == baby)
         }
     }
 
-    else if (input3 == "feed")
+    else if (petAction == "feed")
     {
-        Console.WriteLine("---There are 3 different foods to feed your pet---");
-        Console.WriteLine("---You can even buy food in the store for coins, these foods have special affects---");
-        Console.WriteLine($"---Current amount: {money}---");
-        Console.WriteLine($"---Money is only displayed within the store and when choosing food..---");
-        Console.ReadLine();
-        Console.Clear();
-        Console.WriteLine($"---Here are your choices!---");
-        Console.WriteLine("---(store items only displayed after purchase)---");
-        Console.WriteLine("---1. Simple snack---");
-        Console.WriteLine("--- Doesnt fufill a lot of hunger, good for baby stage. Leads to pet getting dirty faster!---");
-        Console.WriteLine("---2. Hearty meal---");
-        Console.WriteLine("--- Great if your pet is very low on hunger, fufills a small bit of happiness---");
-        Console.WriteLine("---3. Sweet treat---");
-        Console.WriteLine("---Bad for you and doesnt fufill a lot of hunger, in substitute it gives you a lot of happiness---");
-        Console.WriteLine("---Type EXIT to leave---");
+        ExplainPetFeed(money);
         int shopnmr = 4;
         foreach (string thing in foodinv)
         {
             Console.WriteLine($"---{shopnmr}. {thing}---");
             shopnmr++;
         }
+        Console.WriteLine("---Type EXIT to leave---");
         string choicef = Console.ReadLine();
         if (choicef == "1")
         {
@@ -499,26 +485,22 @@ while (currentstage == baby)
 
     }
 
-    else if (input3 == "sleep")
+    else if (petAction == "sleep")
     {
         Console.WriteLine($"--- You put {name} to bed---");
         Console.ReadLine();
-        energy += 20;
+        energy += 30;
         happiness += 5;
 
     }
-
-
-
-
-    else if (input3 == "give medcicine")
+    else if (petAction == "give medcicine")
     {
         Console.WriteLine($"--- You give {name} some medicine, they feel immediatley better---");
         Console.ReadLine();
         health += 20;
         happiness += 5;
     }
-    if (input3 == "bathe")
+    if (petAction == "bathe")
     {
         Console.WriteLine($"--- You give {name} a bath, this cleans them and makes them happier---");
         Console.ReadLine();
@@ -527,7 +509,7 @@ while (currentstage == baby)
 
     }
 
-    else if (input3 == "shop")
+    else if (petAction == "shop")
     {
         Console.WriteLine("---You walk to the store---");
         Console.WriteLine("--Hello! Welcome to berts store!--");
@@ -604,25 +586,56 @@ while (currentstage == baby)
         }
 
     }
+    if (hunger <= 0 || happiness <= 0 || energy <= 0 || cleanness <= 0)
+    {
+        health -= 20;
+        Console.WriteLine("---WARNING!!!---");
+        Console.WriteLine("--- Your pet is dying due to neglect!!---");
+        Console.ReadLine();
+    }
+    if (health > 100) health = 100;
+    if (health < 0) health = 0;
 
+    if (health <= 0)
+    {
+        Console.WriteLine("---Oh no!---");
+        Console.WriteLine($"---{name} has passed away..---");
+        Console.ReadLine();
+        Environment.Exit(0);
+    }
 }
-if (hunger <= 0 || happiness <= 0 || energy <= 0 || cleanness <= 0)
-{
-    health -= 20;
-    Console.WriteLine("---WARNING!!!---");
-    Console.WriteLine("--- Your pet is dying due to neglect!!---");
-    Console.ReadLine();
-}
-if (health > 100) health = 100;
-if (health < 0) health = 0;
 
-if (health <= 0)
-{
-    Console.WriteLine("---Oh no!---");
-    Console.WriteLine($"---{name} has passed away..---");
-    Console.ReadLine();
-    Environment.Exit(0);
-}
 
 
 Console.ReadLine();
+
+static void ExplainPetPlay()
+{
+    Console.Clear();
+    Console.WriteLine("---There are 3 different games you can choose to play with your pet---");
+    Console.WriteLine("---1. Guess the number ---");
+    Console.WriteLine("---Your pet will hide a number between 1-5 (dont ask how), guess right and get happiness points, guess wrong and lose happiness!---");
+    Console.WriteLine("---2. Word ---");
+    Console.WriteLine("---Type the word given within 2 seconds, fail and your pet loses happiness! ---");
+    Console.WriteLine("---3. Feed and guess---");
+    Console.WriteLine("---You are given two foods, choose wrong and your pet falls sick, succeed and you fufill both hunger and happiness points---");
+    Console.WriteLine("---Please choose a game or type EXIT to exit---");
+}
+
+static void ExplainPetFeed(int money)
+{
+    Console.WriteLine("---There are 3 different foods to feed your pet---");
+    Console.WriteLine("---You can even buy food in the store for coins, these foods have special affects---");
+    Console.WriteLine($"---Current amount: {money}---");
+    Console.WriteLine($"---Money is only displayed within the store and when choosing food..---");
+    Console.ReadLine();
+    Console.Clear();
+    Console.WriteLine($"---Here are your choices!---");
+    Console.WriteLine("---(store items only displayed after purchase)---");
+    Console.WriteLine("---1. Simple snack---");
+    Console.WriteLine("--- Doesnt fufill a lot of hunger, good for baby stage. Leads to pet getting dirty faster!---");
+    Console.WriteLine("---2. Hearty meal---");
+    Console.WriteLine("--- Great if your pet is very low on hunger, fufills a small bit of happiness---");
+    Console.WriteLine("---3. Sweet treat---");
+    Console.WriteLine("---Bad for you and doesnt fufill a lot of hunger, in substitute it gives you a lot of happiness---");
+}
