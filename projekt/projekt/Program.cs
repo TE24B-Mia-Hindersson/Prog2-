@@ -12,24 +12,24 @@ Console.WriteLine("-------------------------------------------------------------
 Console.WriteLine("                      3. Cat (difficulty hard)");
 Console.WriteLine("---------------------------------------------------------------------------");
 Console.WriteLine("                   Enter the number of your choice:");
-int choicep = 0;
-string input;
-string pet = "";
-int difficulty = 10;
-string diff;
+int PetChoice = 0;
+string PetChoiceInput;
+string Pet = "";
+int DifficultyInt = 10;
+string DifficultyString;
 
 Pet myPet = new();
-List<string> foodinv = new List<string>();
-while (choicep <= 0)
+List<string> FoodInventory = new List<string>();
+while (PetChoice <= 0)
 {
-    input = Console.ReadLine();
-    bool Success = int.TryParse(input, out choicep);
-    if (!Success | choicep < 1 || choicep > 3)
+    PetChoiceInput = Console.ReadLine();
+    bool Success = int.TryParse(PetChoiceInput, out PetChoice);
+    if (!Success | PetChoice < 1 || PetChoice > 3)
     {
         Console.WriteLine("-----------------------------------------------");
         Console.WriteLine("         Please choose a valid pet!!");
         Console.WriteLine("------------------------------------------------");
-        choicep = 0;
+        PetChoice = 0;
         Console.ReadLine();
         Console.Clear();
     }
@@ -38,41 +38,41 @@ while (choicep <= 0)
         break;
     }
 }
-if (choicep == 1)
+if (PetChoice == 1)
 {
-    pet = "Duck";
-    difficulty = 10;
+    Pet = "Duck";
+    DifficultyInt = 10;
 }
-else if (choicep == 2)
+else if (PetChoice == 2)
 {
-    pet = "Frog";
-    difficulty = 20;
+    Pet = "Frog";
+    DifficultyInt = 20;
 }
-else if (choicep == 3)
+else if (PetChoice == 3)
 {
-    pet = "Cat";
-    difficulty = 30;
+    Pet = "Cat";
+    DifficultyInt = 30;
 }
-if (difficulty == 10)
+if (DifficultyInt == 10)
 {
-    diff = "easy";
+    DifficultyString = "easy";
 }
-else if (difficulty == 20)
+else if (DifficultyInt == 20)
 {
-    diff = "medium";
+    DifficultyString = "medium";
 }
-else if (difficulty == 30)
+else if (DifficultyInt == 30)
 {
-    diff = "hard";
+    DifficultyString = "hard";
 }
 else
 {
-    diff = "unknown";
+    DifficultyString = "unknown";
 }
 Console.WriteLine("------------------------------------------");
 Console.WriteLine("           Excellent choice!");
-Console.WriteLine($"        --you now own a {pet}--");
-Console.WriteLine($"       --difficulty level:{diff}--");
+Console.WriteLine($"        --you now own a {Pet}--");
+Console.WriteLine($"       --difficulty level:{DifficultyString}--");
 Console.WriteLine("-------------------------------------------");
 Console.ReadLine();
 Console.Clear();
@@ -82,58 +82,58 @@ Console.WriteLine("Would you like to choose a name, or be given a prechosen name
 Console.WriteLine("             For prechosen name type 'random'");
 Console.WriteLine("             For own chosen name type 'yes'");
 Console.WriteLine("----------------------------------------------------------------");
-string input1 = Console.ReadLine();
-while (input1 != "yes" && input1 != "random")
+string PetNameInput = Console.ReadLine();
+while (PetNameInput != "yes" && PetNameInput != "random")
 {
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
     Console.WriteLine("Please type either 'yes' or 'random':");
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-    input1 = Console.ReadLine().ToLower();
+    PetNameInput = Console.ReadLine().ToLower();
 }
-string[] randname = { "Mia", "Bosse", "Leon", "Bert" };
-string name = "";
-if (input1 == "yes")
+string[] RandomNames = { "Mia", "Bosse", "Leon", "Bert" };
+string PetName = "";
+if (PetNameInput == "yes")
 {
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-    Console.WriteLine($"Great! Now let me know what youd like to name your {pet}:");
+    Console.WriteLine($"Great! Now let me know what youd like to name your {Pet}:");
     myPet.Name = Console.ReadLine();
     Console.WriteLine($"Aww what a wonderful name!");
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 }
-else if (input1 == "random")
+else if (PetNameInput == "random")
 {
-    name = randname[Random.Shared.Next(randname.Length)];
+    PetName = RandomNames[Random.Shared.Next(RandomNames.Length)];
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-    Console.WriteLine($"Prechosen name chosen: {name}");
+    Console.WriteLine($"Prechosen name chosen: {PetName}");
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 }
-while (string.IsNullOrWhiteSpace(name) || name.Length < 2 || name.Length > 12)
+while (string.IsNullOrWhiteSpace(PetName) || PetName.Length < 2 || PetName.Length > 12)
 {
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
     Console.WriteLine("Name must be between 2 and 12 characters. Try again:");
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-    name = Console.ReadLine();
+    PetName = Console.ReadLine();
 }
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-Console.WriteLine($"Your new pets name is now: {name}");
+Console.WriteLine($"Your new pets name is now: {PetName}");
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 Console.ReadLine();
 Console.Clear();
-int money = 100;
+int Money = 100;
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 Console.WriteLine("I will now give you a small amount of coins to begin taking care of your new pet!");
-Console.WriteLine($"                  -Coins added to wallet: {money}-");
+Console.WriteLine($"                  -Coins added to wallet: {Money}-");
 Console.WriteLine("Also! Before you go, please take this manual that explains your pet.. Good luck!! ");
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 Console.ReadLine();
 Console.Clear();
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-Console.WriteLine($"-You walk home with your new pet {name}!-");
-Console.WriteLine($"-{name} is only little at the moment so you will have to care for them until they grow-");
+Console.WriteLine($"-You walk home with your new pet {PetName}!-");
+Console.WriteLine($"-{PetName} is only little at the moment so you will have to care for them until they grow-");
 Console.WriteLine($"--You take out the manual given to you at the adoption agency--");
-Console.WriteLine($"--The {pet} will go through different stages of life.--");
+Console.WriteLine($"--The {Pet} will go through different stages of life.--");
 Console.WriteLine("These are as follows:");
-if (pet == "Frog" || pet == "Duck")
+if (Pet == "Frog" || Pet == "Duck")
 {
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
     Console.WriteLine("--The egg stage. Your pet is still new born.--");
@@ -157,59 +157,59 @@ Console.WriteLine("--Pets at this stage are very dependent on food and care. Pay
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 Console.ReadLine();
 Console.Clear();
-int age = 0;
-string currentstage = "";
-string egg = "Egg Stage";
-string baby = "Baby Stage";
-string teen = "Teen Stage";
-string adult = "Adult Stage";
-string elder = "Elder Stage";
-if (pet == "Frog" || pet == "Duck")
+int Age = 0;
+string PetCurrentStage = "";
+string Egg = "Egg Stage";
+string Baby = "Baby Stage";
+string Teen = "Teen Stage";
+string Adult = "Adult Stage";
+string Elder = "Elder Stage";
+if (Pet == "Frog" || Pet == "Duck")
 {
-    currentstage = egg;
+    PetCurrentStage = Egg;
 }
-else if (pet == "Cat")
+else if (Pet == "Cat")
 {
-    currentstage = baby;
+    PetCurrentStage = Baby;
 }
-if (currentstage == egg)
+if (PetCurrentStage == Egg)
 {
-    age++;
+    Age++;
 }
-if (currentstage == baby)
+if (PetCurrentStage == Baby)
 {
-    age++;
+    Age++;
 }
-if (currentstage == teen)
+if (PetCurrentStage == Teen)
 {
-    age++;
+    Age++;
 }
-if (currentstage == adult)
+if (PetCurrentStage == Adult)
 {
-    age++;
+    Age++;
 }
-if (currentstage == elder)
+if (PetCurrentStage == Elder)
 {
-    age++;
+    Age++;
 }
 // temporary fix (problem for future me)
 
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-Console.WriteLine($"-Your {pet} is currently in the stage: {currentstage}!-");
+Console.WriteLine($"-Your {Pet} is currently in the stage: {PetCurrentStage}!-");
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 Console.ReadLine();
 Console.Clear();
 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-Console.WriteLine($"-You enter your home with {name}-");
-if (currentstage == egg)
+Console.WriteLine($"-You enter your home with {PetName}-");
+if (PetCurrentStage == Egg)
 {
     Console.WriteLine("-You remember what was said in the manual-");
     Console.WriteLine("-To hatch the egg you must TAP it, but to keep the pet inside happy you can comfort it.-");
     Console.WriteLine("---write tap to continue!!---");
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-    string input2 = Console.ReadLine();
+    string TapInput = Console.ReadLine();
     Console.Clear();
-    if (input2 == "tap")
+    if (TapInput == "tap")
     {
         Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("                               -You feel the egg move-");
@@ -227,256 +227,304 @@ if (currentstage == egg)
         Console.ReadLine();
     }
 }
-int happiness = 100;
-int hunger = 100;
-int energy = 100;
-int health = 100;
-int cleanness = 100;
-static void info(int happiness, int hunger, int energy, int health, int cleanness)
+int PetHappiness = 100;
+int PetHunger = 100;
+int PetEnergy = 100;
+int PetHealth = 100;
+int PetCleanliness = 100;
+static void info(int PetHappiness, int PetHunger, int PetEnergy, int PetHealth, int PetCleanliness)
 {
-    Console.WriteLine($"Happiness: {happiness}   Hunger: {hunger}   Energy: {energy}   Health: {health}   Cleanliness: {cleanness}");
+    Console.WriteLine($"Happiness: {PetHappiness}   Hunger: {PetHunger}   Energy: {PetEnergy}   Health: {PetHealth}   Cleanliness: {PetCleanliness}");
     Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
 }
-int tap = 0;
-while (currentstage == egg)
+int TapAmount = 0;
+while (PetCurrentStage == Egg)
 {
     Console.Clear();
-    info(happiness, hunger, energy, health, cleanness);
+    info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
     Console.WriteLine("--Type 'tap' to tap the egg, or type 'comfort' to soothe the egg:");
-    string action = Console.ReadLine();
-    if (action == "tap")
+    string Action = Console.ReadLine();
+    if (Action == "tap")
     {
         Console.Clear();
-        tap++;
-        happiness -= 20;
-        info(happiness, hunger, energy, health, cleanness);
+        TapAmount++;
+        PetHappiness -= 20;
+        info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---You tapped the egg!---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
     }
-    else if (action == "comfort")
+    else if (Action == "comfort")
     {
         Console.Clear();
-        happiness += 10;
-        info(happiness, hunger, energy, health, cleanness);
+        PetHappiness += 10;
+        info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---You comforted the egg!---");
         Console.WriteLine("---The pet inside seems happier---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
     }
     else
     {
         Console.Clear();
-        info(happiness, hunger, energy, health, cleanness);
+        info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---Oh no! The pet doesnt react, maybe try again!---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
     }
-    if (happiness > 100) happiness = 100;
-    if (happiness < 0) happiness = 0;
+    if (PetHappiness > 100) PetHappiness = 100;
+    if (PetHappiness < 0) PetHappiness = 0;
 
-    if (tap >= 5)
+    if (TapAmount >= 5)
     {
         Console.Clear();
-        currentstage = baby;
+        PetCurrentStage = Baby;
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---the egg hatches!---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
     }
 }
-string petAction = "";
-static void option(int play, int feed, int sleep, int medicine, int bathe, int shop)
+string PetAction = "";
+static void option(int Play, int Feed, int Sleep, int Medicine, int Bathe, int Shop)
 {
     Console.WriteLine("Options: Play     Feed      Sleep     Give medicine      Bathe    Shop");
 }
-if (pet == "Frog" || pet == "Duck" && currentstage == baby)
+if (Pet == "Frog" || Pet == "Duck" && PetCurrentStage == Baby)
 {
     Console.Clear();
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
     Console.WriteLine("---Your pet has grown into a baby---");
+    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
     Console.ReadLine();
     Console.Clear();
 }
-while (currentstage == baby)
+while (PetCurrentStage == Baby)
 {
     Console.Clear();
-    info(happiness, hunger, energy, health, cleanness);
-    happiness -= 10;
-    hunger -= 10;
-    energy -= 15;
-    if (happiness < 0) happiness = 0;
-    if (hunger < 0) hunger = 0;
-    if (energy < 0) energy = 0;
-    if (health < 0) health = 0;
-    if (happiness > 100) happiness = 100;
-    if (hunger > 100) hunger = 100;
-    if (energy > 100) energy = 100;
-    if (health > 100) health = 100;
-    int play = 0;
-    int feed = 0;
-    int sleep = 0;
-    int medicine = 0;
-    int bathe = 0;
-    int shop = 0;
-    option(play, feed, sleep, medicine, bathe, shop);
-    petAction = Console.ReadLine().ToLower();
-    if (petAction == "play")
+    info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+    PetHappiness -= 10;
+    PetHunger -= 10;
+    PetEnergy -= 15;
+    if (PetHappiness < 0) PetHappiness = 0;
+    if (PetHunger < 0) PetHunger = 0;
+    if (PetEnergy < 0) PetEnergy = 0;
+    if (PetHealth < 0) PetHealth = 0;
+    if (PetHappiness > 100) PetHappiness = 100;
+    if (PetHunger > 100) PetHunger = 100;
+    if (PetEnergy > 100) PetEnergy = 100;
+    if (PetHealth > 100) PetHealth = 100;
+    int Play = 0;
+    int Feed = 0;
+    int Sleep = 0;
+    int Medicine = 0;
+    int Bathe = 0;
+    int Shop = 0;
+    int PetAging = 0;
+    option(Play, Feed, Sleep, Medicine, Bathe, Shop);
+    PetAction = Console.ReadLine().ToLower();
+    if (PetAction == "play")
     {
         // PlayWith(myPet);
 
         ExplainPetPlay();
-        string choice = Console.ReadLine();
-        if (choice == "1")
+        string ChoiceGame = Console.ReadLine();
+        if (ChoiceGame == "1")
         {
-            info(happiness, hunger, energy, health, cleanness);
+            info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
             Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("---Good choice!---");
             Console.WriteLine("---Game begins...---");
-            int secret = Random.Shared.Next(1, 6);
-            Console.WriteLine($"--- {name} hides a number... GUESS IT!---");
-            string guess = Console.ReadLine();
-            if (guess == secret.ToString())
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            int Secret = Random.Shared.Next(1, 6);
+            Console.WriteLine($"--- {PetName} hides a number... GUESS IT!---");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            string Guess = Console.ReadLine();
+            if (Guess == Secret.ToString())
             {
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("---Good job!---");
                 Console.WriteLine("---Your pet was so happy, they give you 10 coins---");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
-                happiness += 20;
-                money += 10;
+                PetHappiness += 20;
+                Money += 10;
 
             }
             else
             {
-                Console.WriteLine($"---Oh no! {name} was actually thinking of {secret} ---");
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine($"---Oh no! {PetName} was actually thinking of {Secret} ---");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
-                happiness -= 5;
+                PetHappiness -= 5;
 
             }
 
         }
-        else if (choice == "2")
+        else if (ChoiceGame == "2")
         {
             Console.Clear();
-            info(happiness, hunger, energy, health, cleanness);
+            info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Type the word 'yay' within 2 seconds!");
-
-            string word = "yay";
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            string Word = "yay";
             var start = DateTime.Now;
-            string resp = Console.ReadLine();
+            string Response = Console.ReadLine();
             var end = DateTime.Now;
 
-            if (resp == word && (end - start).TotalSeconds <= 2)
+            if (Response == Word && (end - start).TotalSeconds <= 2)
             {
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("---Good job!---");
                 Console.WriteLine("---Your pet was so happy, they give you 20 coins---");
-                happiness += 20;
-                money += 20;
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                PetHappiness += 20;
+                Money += 20;
 
             }
             else
             {
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("Too slow!");
-                happiness -= 10;
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                PetHappiness -= 10;
 
             }
             Console.ReadLine();
         }
-        else if (choice == "3")
+        else if (ChoiceGame == "3")
         {
             Console.Clear();
-            info(happiness, hunger, energy, health, cleanness);
+            info(PetHappiness, PetHunger, PetEnergy, PetHealth, PetCleanliness);
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("---Good choice!---");
-            Console.WriteLine("---Which food do you give your pet?---");
-            Console.WriteLine("---1. Cookie---");
-            Console.WriteLine("---2. shit ---");
+            Console.WriteLine("---Which secret food do you give your pet?---");
+            Console.WriteLine("---1.---");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("---2.---");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             // idk change 
-            string choiceg3 = Console.ReadLine();
-            if (choiceg3 == "1")
+            string ChoiceGame3 = Console.ReadLine();
+            if (ChoiceGame3 == "1")
             {
-                Console.WriteLine($"---Mmmm {name} enjoyed that!---");
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine($"---Mmmm {PetName} enjoyed that!---");
                 Console.WriteLine("---Your pet was so happy, they give you 10 coins---");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
-                happiness += 20;
-                hunger += 10;
-                money += 10;
+                PetHappiness += 20;
+                PetHunger += 10;
+                Money += 10;
 
             }
             else
             {
-                Console.WriteLine($"---Oh no! {name} feels sick..---");
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine($"---Oh no! {PetName} feels sick..---");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
-                happiness -= 40;
-                health -= 20;
+                PetHappiness -= 40;
+                PetHealth -= 20;
 
             }
         }
+        PetAging ++;
     }
 
-    else if (petAction == "feed")
+    else if (PetAction == "feed")
     {
-        ExplainPetFeed(money);
-        int shopnmr = 4;
-        foreach (string thing in foodinv)
+        ExplainPetFood(FoodInventory, Money);
+        string ChoiceFood = Console.ReadLine();
+        if (ChoiceFood == "1")
         {
-            Console.WriteLine($"---{shopnmr}. {thing}---");
-            shopnmr++;
-        }
-        Console.WriteLine("---Type EXIT to leave---");
-        string choicef = Console.ReadLine();
-        if (choicef == "1")
-        {
+            Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("--- Great choice!---");
-            Console.WriteLine($"---{name} gobbles it up fast!---");
+            Console.WriteLine($"---{PetName} gobbles it up fast!---");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.ReadLine();
-            hunger += 10;
-            cleanness -= 20;
+            PetHunger += 10;
+            PetCleanliness -= 20;
         }
-        if (choicef == "2")
+        if (ChoiceFood == "2")
         {
+            Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("---Excellent!---");
-            Console.WriteLine($"---{name} eats it happily---");
+            Console.WriteLine($"---{PetName} eats it happily---");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.ReadLine();
-            hunger += 30;
-            happiness += 5;
+            PetHunger += 30;
+            PetHappiness += 5;
 
         }
-        if (choicef == "3")
+        if (ChoiceFood == "3")
         {
+            Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("--- Good decision!---");
-            Console.WriteLine($"---{name} enjoys their sweet treat!---");
+            Console.WriteLine($"---{PetName} enjoys their sweet treat!---");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.ReadLine();
-            hunger += 10;
-            happiness += 30;
-            health -= 10;
+            PetHunger += 10;
+            PetHappiness += 30;
+            PetHealth -= 10;
 
         }
-        int num;
-        if (int.TryParse(choicef, out num))
+        int ShopNumSlot;
+        if (int.TryParse(ChoiceFood, out ShopNumSlot))
         {
-            int index = num - 4;
+            int Index = ShopNumSlot - 4;
 
-            if (index >= 0 && index < foodinv.Count)
+            if (Index >= 0 && Index < FoodInventory.Count)
             {
-                string thing = foodinv[index];
+                string Item = FoodInventory[Index];
 
-                if (thing == "Hunger Fufiller")
+                if (Item == "Hunger Fufiller")
                 {
+                    Console.Clear();
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("--- Great choice!---");
-                    Console.WriteLine($"---{name} eats the hunger fufiller!---");
+                    Console.WriteLine($"---{PetName} eats the hunger fufiller!---");
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                     Console.ReadLine();
-                    hunger = 100;
+                    PetHunger = 100;
                 }
-                else if (thing == "Medicine boost")
+                else if (Item == "Medicine boost")
                 {
+                    Console.Clear();
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("--- Good!---");
-                    Console.WriteLine($"---{name} drinks the med boost!---");
+                    Console.WriteLine($"---{PetName} drinks the med boost!---");
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                     Console.ReadLine();
-                    health = 100;
+                    PetHealth = 100;
                 }
-                if (thing == "Super meal")
+                if (Item == "Super meal")
                 {
+                    Console.Clear();
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("--- Great choice!---");
-                    Console.WriteLine($"---{name} really enjoys the super meal!---");
+                    Console.WriteLine($"---{PetName} really enjoys the super meal!---");
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                     Console.ReadLine();
-                    hunger = 100;
-                    health = 100;
-                    energy = 100;
-                    happiness = 100;
-                    cleanness = 100;
+                    PetHunger = 100;
+                    PetHealth = 100;
+                    PetEnergy = 100;
+                    PetHappiness = 100;
+                    PetCleanliness = 100;
                 }
 
             }
@@ -485,126 +533,175 @@ while (currentstage == baby)
 
     }
 
-    else if (petAction == "sleep")
+    else if (PetAction == "sleep")
     {
-        Console.WriteLine($"--- You put {name} to bed---");
+        Console.Clear();
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+        Console.WriteLine($"--- You put {PetName} to bed---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
-        energy += 30;
-        happiness += 5;
+        PetEnergy += 30;
+        PetHappiness += 5;
 
     }
-    else if (petAction == "give medcicine")
+    else if (PetAction == "give medicine")
     {
-        Console.WriteLine($"--- You give {name} some medicine, they feel immediatley better---");
+        Console.Clear();
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+        Console.WriteLine($"--- You give {PetName} some medicine, they feel immediatley better---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
-        health += 20;
-        happiness += 5;
+        PetHealth += 20;
+        PetHappiness += 5;
     }
-    if (petAction == "bathe")
+    if (PetAction == "bathe")
     {
-        Console.WriteLine($"--- You give {name} a bath, this cleans them and makes them happier---");
+        Console.Clear();
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+        Console.WriteLine($"--- You give {PetName} a bath, this cleans them and makes them happier---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
-        cleanness += 30;
-        happiness += 5;
+        PetCleanliness += 30;
+        PetHappiness += 5;
 
     }
 
-    else if (petAction == "shop")
+    else if (PetAction == "shop")
     {
+        Console.Clear();
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---You walk to the store---");
         Console.WriteLine("--Hello! Welcome to berts store!--");
-        Console.WriteLine($"---Current amount: {money}---");
+        Console.WriteLine($"---Current amount: {Money}---");
         Console.WriteLine("--What would you like today?--");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
         Console.Clear();
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine($"---Here are your choices!---");
         Console.WriteLine("---1. Hunger fufiller---");
         Console.WriteLine("--- Cost: 20 coins---");
         Console.WriteLine("--- Gives your pet full hunger immediatley---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---2. Medicine boost---");
         Console.WriteLine("--- Cost: 20 coins---");
         Console.WriteLine("--- Great if your pet is very low on health, boost pet upp to 100 health immediatley---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---3. Super meal---");
         Console.WriteLine("--- Cost: 50 coins---");
         Console.WriteLine("---Fufills all pets needs---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---Type EXIT to leave---");
 
-        string choicesh = Console.ReadLine();
-        if (choicesh == "1")
+        string ShopChoice = Console.ReadLine();
+        if (ShopChoice == "1")
         {
-            if (money >= 20)
+            if (Money >= 20)
             {
-                foodinv.Add("Hunger fufiller");
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                FoodInventory.Add("Hunger fufiller");
                 Console.WriteLine("-- Perfekt!--");
                 Console.WriteLine("---Hunger fufiller has been added to the food menu..---");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
-                money -= 20;
+                Money -= 20;
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Not enough money!");
                 Console.ReadLine();
             }
 
         }
-        if (choicesh == "2")
+        if (ShopChoice == "2")
         {
-            if (money >= 20)
+            if (Money >= 20)
             {
-                foodinv.Add("Medicine boost");
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                FoodInventory.Add("Medicine boost");
                 Console.WriteLine("--Excellent!--");
                 Console.WriteLine("---Medicine boost has been added to the food menu..---");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
             }
             else
             {
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("Not enough money!");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
             }
 
         }
-        if (choicesh == "3")
+        if (ShopChoice == "3")
         {
-            if (money >= 50)
+            if (Money >= 50)
             {
-                foodinv.Add("Super meal");
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                FoodInventory.Add("Super meal");
                 Console.WriteLine("-- Good choice!--");
                 Console.WriteLine("---Super meal has been added to the food menu..---");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
             }
             else
             {
+                Console.Clear();
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("Not enough money!");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.ReadLine();
             }
 
         }
         else
         {
+            Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("---Not enough money or exit choosen!---");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             Console.ReadLine();
         }
 
     }
-    if (hunger <= 0 || happiness <= 0 || energy <= 0 || cleanness <= 0)
+    if (PetHunger <= 0 || PetHappiness <= 0 || PetEnergy <= 0 || PetCleanliness <= 0)
     {
-        health -= 20;
+        Console.Clear();
+        PetHealth -= 20;
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---WARNING!!!---");
         Console.WriteLine("--- Your pet is dying due to neglect!!---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
     }
-    if (health > 100) health = 100;
-    if (health < 0) health = 0;
+    if (PetHealth > 100) PetHealth = 100;
+    if (PetHealth < 0) PetHealth = 0;
 
-    if (health <= 0)
+    if (PetHealth <= 0)
     {
+        Console.Clear();
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("---Oh no!---");
-        Console.WriteLine($"---{name} has passed away..---");
+        Console.WriteLine($"---{PetName} has passed away..---");
+        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
         Console.ReadLine();
         Environment.Exit(0);
     }
+    if (PetAging >= 20)
+    {
+        PetCurrentStage = Teen;
+    }
 }
-
+while (PetCurrentStage == Teen)
+{
+    
+    
+}
 
 
 Console.ReadLine();
@@ -622,11 +719,11 @@ static void ExplainPetPlay()
     Console.WriteLine("---Please choose a game or type EXIT to exit---");
 }
 
-static void ExplainPetFeed(int money)
+static void ExplainPetFood(List<string> FoodInventory, int Money)
 {
     Console.WriteLine("---There are 3 different foods to feed your pet---");
     Console.WriteLine("---You can even buy food in the store for coins, these foods have special affects---");
-    Console.WriteLine($"---Current amount: {money}---");
+    Console.WriteLine($"---Current amount: {Money}---");
     Console.WriteLine($"---Money is only displayed within the store and when choosing food..---");
     Console.ReadLine();
     Console.Clear();
@@ -638,4 +735,11 @@ static void ExplainPetFeed(int money)
     Console.WriteLine("--- Great if your pet is very low on hunger, fufills a small bit of happiness---");
     Console.WriteLine("---3. Sweet treat---");
     Console.WriteLine("---Bad for you and doesnt fufill a lot of hunger, in substitute it gives you a lot of happiness---");
+    int ShopInvNmr = 4;
+    foreach (string Item in FoodInventory)
+    {
+        Console.WriteLine($"---{ShopInvNmr}. {Item}---");
+        ShopInvNmr++;
+    }
+    Console.WriteLine("---Type EXIT to leave---");
 }
