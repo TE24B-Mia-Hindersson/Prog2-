@@ -1,7 +1,7 @@
 public class Pet
 {
     // Basic information
-    public string PetName;
+    public string PetName; 
     public string Type;
     public string DifficultyString;
     //    Easy, Medium, Hard
@@ -21,30 +21,35 @@ public class Pet
     }
 
     // Show stats
-    public void ShowStats()
-    {
-        UI.Stat("Happiness", Happiness);
-        UI.Stat("Hunger", Hunger);
-        UI.Stat("Energy", Energy);
-        UI.Stat("Health", Health);
-        UI.Stat("Cleanliness", Cleanliness);
-    }
+    // public void ShowStats()
+    // {
+    //     UI.Stat("Happiness", Happiness);
+    //     UI.Stat("Hunger", Hunger);
+    //     UI.Stat("Energy", Energy);
+    //     UI.Stat("Health", Health);
+    //     UI.Stat("Cleanliness", Cleanliness);
+    // }
     // Actions
     //     public void 
     // {
 
     //     }
     // options method
+
+
+    // dina möjliga val för den action du vill göra med din pet
     public void option()
     {
         Console.WriteLine("Options: Play     Feed      Sleep     Give medicine      Bathe    Shop");
     }
+    // stats basically
     public void info()
     {
         Console.Clear();
         Console.WriteLine($"Happiness: {Happiness}   Hunger: {Hunger}   Energy: {Energy}   Health: {Health}   Cleanliness: {Cleanliness}");
-        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+        UI.Line();
     }
+
     // public void ExplainPetFood(List<string> FoodInventory, int Money)
     // {
 
@@ -62,6 +67,8 @@ public class Pet
     // {
 
     // }
+
+    // stats för att få de sluta gå över 100 eller under 0 
     public void clampstats()
     {
         Happiness = Math.Clamp(Happiness, 0, 100);
@@ -70,6 +77,8 @@ public class Pet
         Health = Math.Clamp(Health, 0, 100);
         Cleanliness = Math.Clamp(Cleanliness, 0, 100);
     }
+
+    // Hela spelet.. 
     public string WholeStageSection(List<string> FoodInventory, string PetName, ref int Money, ref string PetCurrentStage, string Teen, ref int PetHappiness, ref int PetHunger, ref int PetEnergy, ref int PetHealth, ref int PetCleanliness, ref int PetAging)
     {
         string PetAction = Console.ReadLine().ToLower();
@@ -90,21 +99,21 @@ public class Pet
             {
                 info();
                 Console.Clear();
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("---Good choice!---");
                 Console.WriteLine("---Game begins...---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 int Secret = Random.Shared.Next(1, 6);
                 Console.WriteLine($"--- {PetName} hides a number... GUESS IT!---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 string Guess = Console.ReadLine();
                 if (Guess == Secret.ToString())
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine("---Good job!---");
                     Console.WriteLine("---Your pet was so happy, they give you 10 coins---");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.ReadLine();
                     PetHappiness += 20;
                     Money += 10;
@@ -113,9 +122,9 @@ public class Pet
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine($"---Oh no! {PetName} was actually thinking of {Secret} ---");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.ReadLine();
                     PetHappiness -= 5;
 
@@ -126,9 +135,9 @@ public class Pet
             {
                 Console.Clear();
                 info();
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("Type the word 'yay' within 2 seconds!");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 string Word = "yay";
                 var start = DateTime.Now;
                 string Response = Console.ReadLine();
@@ -137,10 +146,10 @@ public class Pet
                 if (Response == Word && (end - start).TotalSeconds <= 2)
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine("---Good job!---");
                     Console.WriteLine("---Your pet was so happy, they give you 20 coins---");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     PetHappiness += 20;
                     Money += 20;
 
@@ -148,9 +157,9 @@ public class Pet
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine("Too slow!");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     PetHappiness -= 10;
 
                 }
@@ -160,22 +169,22 @@ public class Pet
             {
                 Console.Clear();
                 info();
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("---Good choice!---");
                 Console.WriteLine("---Which secret food do you give your pet?---");
                 Console.WriteLine("---1.---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("---2.---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 // idk change 
                 string ChoiceGame3 = Console.ReadLine();
                 if (ChoiceGame3 == "1")
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine($"---Mmmm {PetName} enjoyed that!---");
                     Console.WriteLine("---Your pet was so happy, they give you 10 coins---");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.ReadLine();
                     PetHappiness += 20;
                     PetHunger += 10;
@@ -185,9 +194,9 @@ public class Pet
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine($"---Oh no! {PetName} feels sick..---");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.ReadLine();
                     PetHappiness -= 40;
                     PetHealth -= 20;
@@ -226,10 +235,10 @@ public class Pet
             if (ChoiceFood == "1")
             {
                 Console.Clear();
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("--- Great choice!---");
                 Console.WriteLine($"---{PetName} gobbles it up fast!---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.ReadLine();
                 PetHunger += 10;
                 PetCleanliness -= 20;
@@ -237,10 +246,10 @@ public class Pet
             if (ChoiceFood == "2")
             {
                 Console.Clear();
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("---Excellent!---");
                 Console.WriteLine($"---{PetName} eats it happily---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.ReadLine();
                 PetHunger += 30;
                 PetHappiness += 5;
@@ -249,10 +258,10 @@ public class Pet
             if (ChoiceFood == "3")
             {
                 Console.Clear();
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("--- Good decision!---");
                 Console.WriteLine($"---{PetName} enjoys their sweet treat!---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.ReadLine();
                 PetHunger += 10;
                 PetHappiness += 30;
@@ -271,30 +280,30 @@ public class Pet
                     if (Item == "Hunger fufiller")
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.WriteLine("--- Great choice!---");
                         Console.WriteLine($"---{PetName} eats the hunger fufiller!---");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                         PetHunger = 100;
                     }
                     else if (Item == "Medicine boost")
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.WriteLine("--- Good!---");
                         Console.WriteLine($"---{PetName} drinks the med boost!---");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                         PetHealth = 100;
                     }
                     if (Item == "Super meal")
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.WriteLine("--- Great choice!---");
                         Console.WriteLine($"---{PetName} really enjoys the super meal!---");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                         PetHunger = 100;
                         PetHealth = 100;
@@ -312,9 +321,9 @@ public class Pet
         else if (PetAction == "sleep")
         {
             Console.Clear();
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine($"--- You put {PetName} to bed---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.ReadLine();
             PetEnergy += 70;
             PetHappiness += 5;
@@ -323,9 +332,9 @@ public class Pet
         else if (PetAction == "give medicine")
         {
             Console.Clear();
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine($"--- You give {PetName} some medicine, they feel immediatley better---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.ReadLine();
             PetHealth += 20;
             PetHappiness += 5;
@@ -333,9 +342,9 @@ public class Pet
         if (PetAction == "bathe")
         {
             Console.Clear();
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine($"--- You give {PetName} a bath, this cleans them and makes them happier---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.ReadLine();
             PetCleanliness += 30;
             PetHappiness += 5;
@@ -345,28 +354,28 @@ public class Pet
         else if (PetAction == "shop")
         {
             Console.Clear();
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine("---You walk to the store---");
             Console.WriteLine("--Hello! Welcome to berts store!--");
             Console.WriteLine($"---Current amount: {Money}---");
             Console.WriteLine("--What would you like today?--");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.ReadLine();
             Console.Clear();
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine($"---Here are your choices!---");
             Console.WriteLine("---1. Hunger fufiller---");
             Console.WriteLine("--- Cost: 20 coins---");
             Console.WriteLine("--- Gives your pet full hunger immediatley---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine("---2. Medicine boost---");
             Console.WriteLine("--- Cost: 20 coins---");
             Console.WriteLine("--- Great if your pet is very low on health, boost pet upp to 100 health immediatley---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine("---3. Super meal---");
             Console.WriteLine("--- Cost: 50 coins---");
             Console.WriteLine("---Fufills all pets needs---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine("---Type EXIT to leave---");
 
             string ShopChoice = Console.ReadLine();
@@ -377,20 +386,20 @@ public class Pet
                     if (!FoodInventory.Contains("Hunger fufiller"))
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         FoodInventory.Add("Hunger fufiller");
                         Console.WriteLine("-- Perfekt!--");
                         Console.WriteLine("---Hunger fufiller has been added to the food menu..---");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                         Money -= 20;
                     }
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.WriteLine("--You already own a Hunger fufiller, it wont be added again!--");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                     }
                 }
@@ -409,20 +418,20 @@ public class Pet
                     if (!FoodInventory.Contains("Medicine boost"))
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         FoodInventory.Add("Medicine boost");
                         Console.WriteLine("--Excellent!--");
                         Console.WriteLine("---Medicine boost has been added to the food menu..---");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                         Money -= 20;
                     }
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.WriteLine("--You already own a Medicine boost, it wont be added again!--");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                     }
 
@@ -430,9 +439,9 @@ public class Pet
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine("Not enough money!");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.ReadLine();
                 }
 
@@ -444,29 +453,29 @@ public class Pet
                     if (!FoodInventory.Contains("Medicine boost"))
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         FoodInventory.Add("Super meal");
                         Console.WriteLine("-- Good choice!--");
                         Console.WriteLine("---Super meal has been added to the food menu..---");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                         Money -= 50;
                     }
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.WriteLine("--You already own a Super meal, it wont be added again!--");
-                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                        UI.Line();
                         Console.ReadLine();
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.WriteLine("Not enough money!");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                    UI.Line();
                     Console.ReadLine();
                 }
 
@@ -474,9 +483,9 @@ public class Pet
             else
             {
                 Console.Clear();
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.WriteLine("---Not enough money or exit choosen!---");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+                UI.Line();
                 Console.ReadLine();
             }
             PetAging++;
@@ -486,10 +495,10 @@ public class Pet
         {
             Console.Clear();
             PetHealth -= 20;
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine("---WARNING!!!---");
             Console.WriteLine("--- Your pet is dying due to neglect!!---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.ReadLine();
 
         }
@@ -499,10 +508,10 @@ public class Pet
         if (PetHealth <= 0)
         {
             Console.Clear();
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.WriteLine("---Oh no!---");
             Console.WriteLine($"---{PetName} has passed away..---");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+            UI.Line();
             Console.ReadLine();
             return "dead";
             // Environment.Exit(0);

@@ -1,19 +1,23 @@
 using System.Reflection.Metadata.Ecma335;
 using System.Security;
-
+// skapare spelaren och UI
 Player player = new Player();
 UI ui = new UI();
+
+// Spelet börjar!
+UI.Line();
 Console.WriteLine("==Welcome to Bosse pet adoption!==");
+UI.Line();
 Console.ReadLine();
 Console.Clear();
 Console.WriteLine("   Please tell me which, between these lovely three pets you would like?");
-Console.WriteLine("---------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("                      1. Duck (difficulty easy)");
-Console.WriteLine("---------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("                     2. Frog (difficulty medium)");
-Console.WriteLine("---------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("                      3. Cat (difficulty hard)");
-Console.WriteLine("---------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("                   Enter the number of your choice:");
 int PetChoice = 0;
 string PetChoiceInput;
@@ -21,15 +25,16 @@ string Type = "";
 int DifficultyInt = 10;
 string DifficultyString;
 List<string> FoodInventory = new List<string>();
+// loop för att säkerställa gilltigt val
 while (PetChoice <= 0)
 {
     PetChoiceInput = Console.ReadLine();
     bool Success = int.TryParse(PetChoiceInput, out PetChoice);
     if (!Success | PetChoice < 1 || PetChoice > 3)
     {
-        Console.WriteLine("-----------------------------------------------");
+       UI.Line();
         Console.WriteLine("         Please choose a valid pet!!");
-        Console.WriteLine("------------------------------------------------");
+       UI.Line();
         PetChoice = 0;
         Console.ReadLine();
         Console.Clear();
@@ -39,6 +44,7 @@ while (PetChoice <= 0)
         break;
     }
 }
+// gör så att den pet man valde har den difficulty som står övan (difficulty inte gjord än :( )
 if (PetChoice == 1)
 {
     Type = "Duck";
@@ -54,6 +60,7 @@ else if (PetChoice == 3)
     Type = "Cat";
     DifficultyInt = 30;
 }
+// sätter difficulty som text
 if (DifficultyInt == 10)
 {
     DifficultyString = "easy";
@@ -70,56 +77,59 @@ else
 {
     DifficultyString = "unknown";
 }
-Console.WriteLine("------------------------------------------");
+UI.Line();
 Console.WriteLine("           Excellent choice!");
 Console.WriteLine($"        --you now own a {Type}--");
 Console.WriteLine($"       --difficulty level:{DifficultyString}--");
-Console.WriteLine("-------------------------------------------");
+UI.Line();
 Console.ReadLine();
 Console.Clear();
 
-Console.WriteLine("---------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("Would you like to choose a name, or be given a prechosen name?");
 Console.WriteLine("             For prechosen name type 'random'");
 Console.WriteLine("             For own chosen name type 'yes'");
-Console.WriteLine("----------------------------------------------------------------");
+UI.Line();
 string PetNameInput = Console.ReadLine();
+// loop för gilltigt svar för namn
 while (PetNameInput != "yes" && PetNameInput != "random")
 {
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
     Console.WriteLine("Please type either 'yes' or 'random':");
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
     PetNameInput = Console.ReadLine().ToLower();
 }
 string[] RandomNames = { "Mia", "Bosse", "Leon", "Bert" };
 string PetName = "";
 if (PetNameInput == "yes")
 {
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
     Console.WriteLine($"Great! Now let me know what youd like to name your {Type}:");
     PetName = Console.ReadLine();
     Console.WriteLine($"Aww what a wonderful name!");
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
 }
 else if (PetNameInput == "random")
 {
     PetName = RandomNames[Random.Shared.Next(RandomNames.Length)];
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
     Console.WriteLine($"Prechosen name chosen: {PetName}");
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
 }
+// säkerställer att namnen är mellan 2-12 bokstäver (stylistic choice typ)
 while (string.IsNullOrWhiteSpace(PetName) || PetName.Length < 2 || PetName.Length > 12)
 {
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
     Console.WriteLine("Name must be between 2 and 12 characters. Try again:");
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
     PetName = Console.ReadLine();
 }
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine($"Your new pets name is now: {PetName}");
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.ReadLine();
 Console.Clear();
+// skapar själva husdjuret på riktigt
 Pet pet = new Pet
 {
    PetName = PetName,
@@ -127,41 +137,43 @@ Pet pet = new Pet
     PetCurrentStage = (Type == "Duck" || Type == "Frog")? "Egg Stage" : "Baby Stage"
 };
 int Money = 100;
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("I will now give you a small amount of coins to begin taking care of your new pet!");
 Console.WriteLine($"                  -Coins added to wallet: {Money}-");
 Console.WriteLine("Also! Before you go, please take this manual that explains your pet.. Good luck!! ");
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.ReadLine();
 Console.Clear();
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine($"-You walk home with your new pet {PetName}!-");
 Console.WriteLine($"-{PetName} is only little at the moment so you will have to care for them until they grow-");
 Console.WriteLine($"--You take out the manual given to you at the adoption agency--");
 Console.WriteLine($"--The {Type} will go through different stages of life.--");
 Console.WriteLine("These are as follows:");
+// förklarar alla stadier av livet
+// skulle originellt fungera som något med difficulty men nu gör de bara cat stadiet lättare lol :(
 if (Type == "Frog" || Type == "Duck")
 {
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
     Console.WriteLine("--The egg stage. Your pet is still new born.--");
     Console.WriteLine("--To progress you will have to tap the egg, but be patient as overdoing it may cause your pet to come out the egg very unhappy!!--");
-    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+    UI.Line();
 }
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("--The baby stage.--");
 Console.WriteLine("--This stage is by far the most tricky! Be sure to carefully take care of your pet during this stage.--");
 Console.WriteLine("--Your pet will not like bathing all that much during this stage. Your pet will also tire very fast during this stage, so be careful not to overwork your pet!--");
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("--The teen stage.--");
 Console.WriteLine("--In this stage you will have to keep a keen eye on your pet, they will need more playtime, food and will lose happiness very fast! Be sure to pay attention!!--");
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("--The adult stage.--");
 Console.WriteLine("--The longest stage. Way more indepented and will even bathe itself in certain circumstances.--");
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine("--The elder stage.--");
 Console.WriteLine("--The saddest stage. Your pet is nearing its end of life.. Elder pets do not enjoy playing as much as before anymore.--");
 Console.WriteLine("--Pets at this stage are very dependent on food and care. Pay close attention to prolonge their life.--");
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.ReadLine();
 Console.Clear();
 string PetCurrentStage = "";
@@ -179,23 +191,27 @@ else if (Type == "Cat")
 {
     PetCurrentStage = Baby;
 }
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine($"-Your {Type} is currently in the stage: {PetCurrentStage}!-");
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.ReadLine();
 Console.Clear();
-Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
+UI.Line();
 Console.WriteLine($"-You enter your home with {PetName}-");
 Console.ReadLine();
 Console.Clear();
 // pet.ExplainPetFood(FoodInventory, Money);
 // pet.ExplainPetPlay();
+
+// huvud loop för spelet
 string action = "";
 while (action != "dead" )
-{pet.info();
+{
+pet.info();
 pet.option();
 pet.WholeStageSection(FoodInventory, PetName, ref Money, ref PetCurrentStage, Teen, ref pet.Happiness, ref pet.Hunger, ref pet.Energy, ref pet.Health, ref pet.Cleanliness, ref pet.Age);
 pet.clampstats();
+// gör så att när djuret dör så slutar spelet!
 if (action == "dead")
     {
         break;
