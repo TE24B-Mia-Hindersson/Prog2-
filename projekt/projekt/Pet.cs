@@ -20,23 +20,6 @@ public class Pet
         get { return Health > 0; }
     }
 
-    // Show stats
-    // public void ShowStats()
-    // {
-    //     UI.Stat("Happiness", Happiness);
-    //     UI.Stat("Hunger", Hunger);
-    //     UI.Stat("Energy", Energy);
-    //     UI.Stat("Health", Health);
-    //     UI.Stat("Cleanliness", Cleanliness);
-    // }
-    // Actions
-    //     public void 
-    // {
-
-    //     }
-    // options method
-
-
     // dina möjliga val för den action du vill göra med din pet
     public void option()
     {
@@ -50,25 +33,8 @@ public class Pet
         UI.Line();
     }
 
-    // public void ExplainPetFood(List<string> FoodInventory, int Money)
-    // {
-
-    // // }
-    // is this necessary (i cant remember lol)
-    //  public void PetInfo()
-    //     {
-    //         if (Happiness < 0) Happiness = 0;
-    //         if (Hunger < 0) Hunger = 0;
-    //         if (Energy < 0) Energy = 0;
-    //         if (Cleanliness < 0) Cleanliness = 0;
-    //         if (Health > 100) Health = 100;
-    //     }
-    //     public void ExplainPetPlay()
-    // {
-
-    // }
-
     // stats för att få de sluta gå över 100 eller under 0 
+    // kod hjälp tagen från stack overflow
     public void clampstats()
     {
         Happiness = Math.Clamp(Happiness, 0, 100);
@@ -139,6 +105,7 @@ public class Pet
                 Console.WriteLine("Type the word 'yay' within 2 seconds!");
                 UI.Line();
                 string Word = "yay";
+                 // kod hjälp tagen från stack overflow och min pappa
                 var start = DateTime.Now;
                 string Response = Console.ReadLine();
                 var end = DateTime.Now;
@@ -513,6 +480,7 @@ public class Pet
             Console.WriteLine($"---{PetName} has passed away..---");
             UI.Line();
             Console.ReadLine();
+             // kod hjälp tagen från min pappa
             return "dead";
             // Environment.Exit(0);
         }

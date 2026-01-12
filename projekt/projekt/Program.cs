@@ -1,12 +1,13 @@
 using System.Reflection.Metadata.Ecma335;
 using System.Security;
 // skapare spelaren och UI
+
 Player player = new Player();
 UI ui = new UI();
 
 // Spelet börjar!
 UI.Line();
-Console.WriteLine("==Welcome to Bosse pet adoption!==");
+Console.WriteLine("==Welcome to Mia pet adoption!==");
 UI.Line();
 Console.ReadLine();
 Console.Clear();
@@ -180,8 +181,9 @@ string PetCurrentStage = "";
 string Egg = "Egg Stage";
 string Baby = "Baby Stage";
 string Teen = "Teen Stage";
-string Adult = "Adult Stage";
-string Elder = "Elder Stage";
+// string Adult = "Adult Stage";
+// string Elder = "Elder Stage";
+// useless??
 
 if (Type == "Frog" || Type == "Duck")
 {
@@ -212,6 +214,7 @@ pet.option();
 pet.WholeStageSection(FoodInventory, PetName, ref Money, ref PetCurrentStage, Teen, ref pet.Happiness, ref pet.Hunger, ref pet.Energy, ref pet.Health, ref pet.Cleanliness, ref pet.Age);
 pet.clampstats();
 // gör så att när djuret dör så slutar spelet!
+ // kod hjälp tagen från min pappa
 if (action == "dead")
     {
         break;

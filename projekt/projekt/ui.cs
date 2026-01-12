@@ -4,9 +4,9 @@ public class UI
     // skriver ut en horrizontell linje (decoration)
     public static void Line ()
     {
-        Console.ForegroundColor = ConsoleColor.Gray;
+        // Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine(new string ('═', 133));
-        Console.ResetColor();
+        // Console.ResetColor();
     }
     // public static void Title(string text)
     // {
